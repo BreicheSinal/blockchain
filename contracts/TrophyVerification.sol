@@ -70,4 +70,9 @@ contract TrophyVerification{
 
         emit TrophyVerified(trophyId, newStatus);
     }
+
+    // get trophies by owner function
+    function getTrophiesByOwner(address owner) public view returns (uint256[] memory) {
+        return trophiesByOwner[owner];
+    }
 }
