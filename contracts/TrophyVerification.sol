@@ -59,4 +59,15 @@ contract TrophyVerification{
         emit TrophyRequested(trophyId, name, msg.sender);
         return trophyId;
     }
+
+    // verification trophy function
+    function verifyTrophy(uint256 trophyId, bool approved) public {
+        require(msg.sender == federation, "Only federation can verify");
+        require(trophies[trophyId].status == VerificationStatus.Pending, "Not pending");
+
+        VerificationStatus newStatus = approved ? VerificationStatus.Verified : VerificationStatus.Rejected;
+        trophies[trophyId].status = newStatus;
+
+        emit TrophyVerified(trophyId, newStatus);
+    }
 }
