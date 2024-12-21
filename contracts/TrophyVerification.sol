@@ -25,4 +25,10 @@ contract TrophyVerification{
     uint256 public trophyId; // auto-increment
     mapping(uint256 => Trophy) public trophies; // mapping trophyId to trophy
     mapping(address => uint256[]) public trophiesByOwner; // mapping address to array of their trophyId
+
+    /** EVENTS */
+
+    // emitted when user request a new trophy
+    event TrophyRequested(uint256 indexed id, string name, address indexed requester);
+    
 }
