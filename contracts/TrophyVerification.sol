@@ -75,4 +75,9 @@ contract TrophyVerification{
     function getTrophiesByOwner(address owner) public view returns (uint256[] memory) {
         return trophiesByOwner[owner];
     }
+
+    // get all trophies function
+    function getTotalTrophies() public view returns (uint256) {
+        return nextTrophyId;
+    }
 }
