@@ -22,7 +22,7 @@ contract TrophyVerification{
     }
 
     /** STORAGE */
-    uint256 public trophyId; // auto-increment
+    uint256 public nextTrophyId; // auto-increment
     mapping(uint256 => Trophy) public trophies; // mapping trophyId to trophy
     mapping(address => uint256[]) public trophiesByOwner; // mapping address to array of their trophyId
 
@@ -42,4 +42,21 @@ contract TrophyVerification{
     }
 
 
+    // request trophy function 
+    function requestTrophy(string memory name, string memory description) public returns (uint256) {
+        uint256 trophyId = nextTrophyId++;
+
+        trophies[trophyId] = Trophy({
+            id: trophyId,
+            name: name,
+            description: description,
+            status: VerificationStatus.Pending,
+            requester: msg.sender
+        });
+
+        trophiesByOwner[msg.sender].push(trophyId);
+
+        emit TrophyRequested(trophyId, name, msg.sender);
+        return trophyId;
+    }
 }
