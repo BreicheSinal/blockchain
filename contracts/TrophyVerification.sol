@@ -12,4 +12,12 @@ contract TrophyVerification{
     // enumeration VerificationStatus: 3 possible values  
     enum VerificationStatus { Pending, Verified, Rejected }
 
+    // TROPHY STRUCT
+    struct Trophy {
+    uint256 id; // unsigned integer
+    string name;
+    string description;
+    VerificationStatus status;
+    address requester; // can be athlete || coach || club
+}
 }
