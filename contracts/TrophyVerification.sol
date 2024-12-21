@@ -4,7 +4,7 @@ pragma solidity ^0.8.28; // solidity compiler version
 import "hardhat/console.sol";
 
 contract TrophyVerification{
-    // VARIABLES && ENUMS
+    /**  VARIABLES && ENUMS */
 
     // public variable of type address
     address public federation;
@@ -12,12 +12,17 @@ contract TrophyVerification{
     // enumeration VerificationStatus: 3 possible values  
     enum VerificationStatus { Pending, Verified, Rejected }
 
-    // TROPHY STRUCT
+    /** TROPHY STRUCT */
     struct Trophy {
-    uint256 id; // unsigned integer
-    string name;
-    string description;
-    VerificationStatus status;
-    address requester; // can be athlete || coach || club
-}
+        uint256 id; // unsigned integer
+        string name;
+        string description;
+        VerificationStatus status;
+        address requester; // can be athlete || coach || club
+    }
+
+    /** STORAGE */
+    uint256 public trophyId; // auto-increment
+    mapping(uint256 => Trophy) public trophies; // mapping trophyId to trophy
+    mapping(address => uint256[]) public trophiesByOwner; // mapping address to array of their trophyId
 }
