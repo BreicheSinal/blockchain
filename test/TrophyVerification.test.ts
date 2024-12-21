@@ -53,4 +53,32 @@ describe("TrophyVerification", function () {
       expect(trophy.status).to.equal(0); // asserting if status is 'Pending' == 0
     });
   });
+
+  // group of tests related to trophy verification
+  describe("Trophy Verification", function () {
+    // trophy request is created by user before each test
+    beforeEach(async function () {
+      await trophyVerification
+        .connect(user)
+        .requestTrophy("Olympic Medal", "Gold medal in 100m sprint");
+    });
+
+    // testing federation (owner) can verify a trophy request
+    it("Should allow federation to verify trophy", async function () {
+      // federation verifies trophy
+      await trophyVerification.verifyTrophy(0, true);
+
+      // retrieving updated trophy details.
+      const trophy = await trophyVerification.trophies(0);
+      expect(trophy.status).to.equal(1); // asserting if status is 'Verified' == 1
+    });
+
+    // testing that a non-federation user cannot verify a trophy
+    it("Should not allow non-federation to verify trophy", async function () {
+      // user attempting to verify the trophy
+      await expect(
+        trophyVerification.connect(user).verifyTrophy(0, true)
+      ).to.be.revertedWithCustomError(trophyVerification, "OnlyFederation"); // asserting if transaction is reverted with expected custom error
+    });
+  });
 });
