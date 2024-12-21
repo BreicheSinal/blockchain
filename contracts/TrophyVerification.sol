@@ -34,4 +34,12 @@ contract TrophyVerification{
     // emitted when federation verifies or rejects a trophy    
     event TrophyVerified(uint256 indexed id, VerificationStatus status);
 
+    /** CONSTRUCTOR */
+
+    // executed when the contract deployed
+    constructor() {
+        federation = msg.sender; // set federation to address of deployer
+    }
+
+
 }
