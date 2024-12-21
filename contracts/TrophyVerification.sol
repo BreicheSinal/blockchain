@@ -30,5 +30,8 @@ contract TrophyVerification{
 
     // emitted when user request a new trophy
     event TrophyRequested(uint256 indexed id, string name, address indexed requester);
-    
+
+    // emitted when federation verifies or rejects a trophy    
+    event TrophyVerified(uint256 indexed id, VerificationStatus status);
+
 }
